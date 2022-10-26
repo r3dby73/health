@@ -1,0 +1,171 @@
+body {
+    margin: 0;
+    width: 100%;
+    min-height: 100vh;
+    font-family: 'Comfortaa', cursive;
+    color: white;
+    background-color: #BCC4D0;
+}
+
+.container-1 {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+}
+
+.container-2 {
+    width: 90%;
+    margin: 20px 0px;
+}
+
+header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header-left-part {
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.header-right-part {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.header-title {
+    margin-left: 10px;
+}
+
+.header-title p {
+    margin: 0;
+    font-size: 25px;
+}
+
+.header-title-part1 {
+    font-weight: bold;
+}
+
+input[type="submit"] {
+    margin-left: 20px;
+    padding: 0px 20px;
+    height: 30px;
+    background-color: #494974;
+    border-radius: 7px;
+    border: none;
+    color: white;
+    font-size: 17px;
+    transition-duration: 0.2s;
+    cursor: pointer;
+}
+
+input[type="submit"]:hover{
+    background-color: #7070A5;
+}
+
+.categories {
+    margin-top: 100px;
+    width: 100%;
+    display: flex;
+}
+
+.terapevtia {
+    width: 100%;
+    height: 230px;
+    background-color: #36DEA0;
+    transition-duration: 0.2s;
+    color: white;
+    text-decoration: none;
+}
+
+.terapevtia:hover {
+    box-shadow: 2px 2px 10px #138250;
+}
+
+.ortopedia {
+    margin-left: 10px;
+    width: 100%;
+    height: 230px;
+    background-color: #32C498;
+    transition-duration: 0.2s;
+    color: white;
+    text-decoration: none;
+}
+
+.ortopedia:hover {
+    box-shadow: 2px 2px 10px #1F6D50;
+}
+
+.nevrologia {
+    margin-left: 10px;
+    width: 100%;
+    height: 230px;
+    background-color: #348F9B;
+    transition-duration: 0.2s;
+    color: white;
+    text-decoration: none;
+}
+
+.nevrologia:hover {
+    box-shadow: 2px 2px 10px black;
+}
+
+.andocrinolog {
+    margin-left: 10px;
+    width: 100%;
+    height: 230px;
+    background-color: #326D9E;
+    transition-duration: 0.2s;
+    color: white;
+    text-decoration: none;
+}
+
+.andocrinolog:hover {
+    box-shadow: 2px 2px 10px black;
+}
+
+.categoies-img-block {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.categoies-title {
+    margin: 10px 0px;
+    text-align: center;
+    font-size: 25px;
+}
+
+.categoies-body {
+    text-align: center;
+    text-decoration: underline;
+}
+
+.main-info {
+    margin-top: 70px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.main-info-title {
+    margin: 0;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.main-info-text {
+    width: 90%;
+    font-size: 18px;
+}
+
+.main-info li {
+    width: 90%;
+    font-size: 18px;
+    margin-bottom: 20px;
+}
