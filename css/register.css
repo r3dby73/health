@@ -55,6 +55,14 @@ input {
     font-size: 16px;
 }
 
+.input-numeric {
+    width: 30px;
+}
+
+.input-street {
+    width: 110px;
+}
+
 .button-block {
     width: 100%;
     display: flex;
@@ -86,4 +94,34 @@ input {
     width: 100%;
     display: flex;
     justify-content: space-between;
+    align-items: flex-end;
+}
+
+.inputs-block-group {
+    position: relative;
+    width: 320px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.error {
+    width: 300px;
+    font-size: 13px;
+    margin: 5px 0px 21px 0px;
+    color: red;
+}
+
+.error-input {
+    box-shadow: 0px 0px 10px red;
+    margin: 0px;
+}
+
+.error-absolute {
+    position: absolute;
+    bottom: 0px;
+}
+
+.input-absolute {
+    margin-bottom: 40px;
 }

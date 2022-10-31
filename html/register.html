@@ -2,11 +2,13 @@
 <html>
     <head>
         <title>Health - Регистрация</title>
+        <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href="../css/register.css" rel="stylesheet">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@500&display=swap" rel="stylesheet">
+        <script src="https://unpkg.com/sweetalert2@11.6.5/dist/sweetalert2.all.min.js"></script>
     </head>
     <body>
         <div class="container-1">
@@ -19,50 +21,76 @@
                 <p class="form-title">Регистрация</p>
                 
                 <div class="container-3">
-                    <div class="inputs-block">
-                        <div>
-                            <p class="input-label">Имя</p>
-                            <input>
+                    <form action="../php/registerCheck.php" method="post">
+                        <div class="inputs-block">
+                            <div>
+                                <p class="input-label">Имя</p>
+                                <input name="name" placeholder="Иван" required>
+                            </div>
+                            <div>
+                                <p class="input-label">Номер телефона</p>
+                                <input name="phoneNumber" placeholder="+375(XX)XXX-XX-XX" required>
+                            </div>
                         </div>
-                        <div>
-                            <p class="input-label">Номер телефона</p>
-                            <input>
+                        <div class="inputs-block">
+                            <div>
+                                <p class="input-label">Фамилия</p>
+                                <input name="surname" placeholder="Иванов" required>
+                            </div>
+                            <div>
+                                <p class="input-label">Идентификационный номер</p>
+                                <input name="id" placeholder="XXXXXXXXXXXXXX" required>
+                            </div>
                         </div>
-                    </div>
-                    <div class="inputs-block">
-                        <div>
-                            <p class="input-label">Фамилия</p>
-                            <input>
+                        <div class="inputs-block">
+                            <div>
+                                <p class="input-label">Отчество</p>
+                                <input name="patronymic" placeholder="Иванович" required>
+                            </div>
+                            <div>
+                                <p class="input-label">Обслуживающая поликлиника</p>
+                                <input name="clinic" placeholder="25" required>
+                            </div>
                         </div>
-                        <div>
-                            <p class="input-label">Идентификационный номер</p>
-                            <input>
+                        <div class="inputs-block">
+                            <div>
+                                <p class="input-label">Район</p>
+                                <input name="district" placeholder="Центральный" required>
+                            </div>
+                            <div class="inputs-block-group">
+                                <div>
+                                    <p class="input-label">Улица</p>
+                                    <input class="input-street" name="street" placeholder="Пушкина" required>
+                                </div>
+                                <div>
+                                    <p class="input-label">Дом</p>
+                                    <input class="input-numeric" name="house" placeholder="102" required>
+                                </div>
+                                <div>
+                                    <p class="input-label">Корп.</p>
+                                    <input class="input-numeric" name="build" placeholder="5">
+                                </div>
+                                <div>
+                                    <p class="input-label">Кв.</p>
+                                    <input class="input-numeric" name="apartment" placeholder="102">
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="inputs-block">
-                        <div>
-                            <p class="input-label">Отчество</p>
-                            <input>
+                        <div class="inputs-block">
+                            <div>
+                                <p class="input-label">Пароль</p>
+                                <input name="password" type="password" required>
+                            </div>
+                            <div>
+                                <p class="input-label">Подтвердить пароль</p>
+                                <input name="confirmedPassword" type="password" required>
+                            </div>
                         </div>
-                        <div>
-                            <p class="input-label">Место жительства</p>
-                            <input>
+
+                        <div class="button-block">
+                            <input class="button" type="submit" value="Зарегистрироваться">
                         </div>
-                    </div>
-                    <div class="inputs-block">
-                        <div>
-                            <p class="input-label">Пароль</p>
-                            <input type="password">
-                        </div>
-                        <div>
-                            <p class="input-label">Подтвердить пароль</p>
-                            <input type="password">
-                        </div>
-                    </div>
-                    
-                    <div class="button-block">
-                        <input class="button" type="submit" value="Зарегистрироваться">
-                    </div>
+                    </form>
                     <div class="cancel-block">
                         <a href="main_page.html">Отмена</a>
                     </div>
