@@ -14,7 +14,7 @@
             <div class="container-2">
                 <header>
                     <div class="header-left-part">
-                        <a href="main_page.html">
+                        <a href="main_page.php">
                             <img src="../img/heart.png" width="110px">
                         </a>
                         <div class="header-title">
@@ -23,17 +23,44 @@
                         </div>
                     </div>
                     <div class="header-right-part">
-                        <a href="login.html">
-                            <input type="submit" value="Войти">
-                        </a>
-                        <a href="register.html">
-                            <input type="submit" value="Зарегистрироваться">
-                        </a>
+<?php
+    
+session_start();
+if(isset($_SESSION['name']))
+{
+    echo "<img src=\"../img/user.png\" width=\"50px\">
+          <div class=\"profile-part\">
+                <p class=\"profile-part-welcome\">".$_SESSION['name']." ".$_SESSION['surname']."</p>
+                <a href=\"personal_page_profile.php\"><p>Личный кабинет</p></a>
+                <a href=\"logout.php\"><p>Выйти из учетной записи</p></a>
+          </div>";
+}
+else if(isset($_COOKIE['name']))
+{
+    echo "<img src=\"../img/user.png\" width=\"50px\">
+          <div class=\"profile-part\">
+                <p class=\"profile-part-welcome\">".$_COOKIE['name']." ".$_COOKIE['surname']."</p>
+                <a href=\"personal_page_profile.php\"><p>Личный кабинет</p></a>
+                <a href=\"logout.php\"><p>Выйти из учетной записи</p></a>
+          </div>";
+}
+else
+{
+    echo "<a href=\"login.php\">
+                <input type=\"submit\" value=\"Войти\">
+          </a>
+          <a href=\"register.php\">
+                <input type=\"submit\" value=\"Зарегистрироваться\">
+          </a>";
+}
+
+?>
+                        
                     </div>
                 </header>
                 
                 <div class="categories">
-                    <a class="terapevtia" href="terapevtia.html">
+                    <a class="terapevtia" href="terapevtia.php">
                         <div class="categoies-img-block">
                             <img src="../img/terapevtia.png">
                         </div>
@@ -41,7 +68,7 @@
                         <p class="categoies-body">Консультация терапевта</p>
                     </a>
                     
-                    <a class="ortopedia" href="ortopedia.html">
+                    <a class="ortopedia" href="ortopedia.php">
                         <div class="categoies-img-block">
                             <img src="../img/ortopedia.png">
                         </div>
@@ -49,7 +76,7 @@
                         <p class="categoies-body">Консультация травмотолога-ортопеда</p>
                     </a>
                     
-                    <a class="nevrologia" href="nevrologia.html">
+                    <a class="nevrologia" href="nevrologia.php">
                         <div class="categoies-img-block">
                             <img src="../img/nevrologia.png">
                         </div>
@@ -57,7 +84,7 @@
                         <p class="categoies-body">Консультация невролога</p>
                     </a>
                     
-                    <a class="andocrinolog" href="andocrinolog.html">
+                    <a class="andocrinolog" href="andocrinolog.php">
                         <div class="categoies-img-block">
                             <img src="../img/andocrinolog.png">
                         </div>

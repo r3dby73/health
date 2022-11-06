@@ -1,12 +1,16 @@
 <?php
 
+session_start();
 require_once("../classes/LogUser.php");
+
+if(isset($_SESSION['name']) || isset($_COOKIE['name']))
+    header("Location: http://localhost:8080/health/php/main_page.php");
+
 
 $phoneNumber = htmlspecialchars(trim($_POST['phoneNumber']));
 $password = htmlspecialchars(trim($_POST['password']));
 
 $user = new LogUser($phoneNumber, $password);
-$error = false;
 
 ?>
 
@@ -25,22 +29,21 @@ $error = false;
         <div class="container-1">
             <div class="container-2">
                 <div class="logo-block">
-                    <a href="../html/main_page.html">
+                    <a href="main_page.php">
                         <img src="../img/heart.png" width="110px">
                     </a>
                 </div>
                 <p class="form-title">Авторизация</p>
                 
-                <form class="container-3" action="../php/loginCheck.php" method="post">
+                <form class="container-3" action="loginCheck.php" method="post">
                     <?php
                         if(!$user->checkExistsUser())
                         {
                             echo "<p class=\"error\">Неверно введен номер телефона или пароль</p>";
-                            $error = true;
                         }
                         else
                         {
-                            echo "<script>window.location.replace(\"http://localhost:8080/health/html/main_page.html\");</script>";
+                            echo "<script>window.location.replace(\"http://localhost:8080/health/php/main_page.php\");</script>";
                         }
                     ?>
                     <p class="input-label">Номер телефона</p>
@@ -51,7 +54,7 @@ $error = false;
                         <input class="button" type="submit" value="Войти">
                     </div>
                     <div class="cancel-block">
-                        <a href="../html/main_page.html">Отмена</a>
+                        <a href="main_page.php">Отмена</a>
                     </div>
                 </form>
             </div>

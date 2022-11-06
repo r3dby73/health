@@ -36,6 +36,7 @@ header {
     width: 100%;
     display: flex;
     justify-content: flex-end;
+    align-items: center;
 }
 
 .header-title {
@@ -168,4 +169,24 @@ input[type="submit"]:hover{
     width: 90%;
     font-size: 18px;
     margin-bottom: 20px;
+}
+
+.profile-part {
+    margin-left: 20px;
+}
+
+.profile-part-welcome {
+    margin: 0px 0px 5px 0px;
+    font-size: 20px;
+    font-weight: bold;
+    color: black;
+}
+
+.profile-part a {
+    margin: 0;
+    color: blue;
+}
+
+.profile-part a p {
+    margin: 8px 0px 0px 0px;
 }

@@ -4,15 +4,14 @@ session_start();
 require_once "../classes/RegUser.php";
 require_once "db_con.php";
 
-if(isset($_SESSION['name']) || isset($_COOKIE['name']))
-    header("Location: http://localhost:8080/health/php/main_page.php");
-
+if(!isset($_SESSION['name']) && !isset($_COOKIE['name']))
+    header("Location: http://localhost:8080/health/php/login.php");
 
 $name = htmlspecialchars(trim($_POST['name']));
 $surname = htmlspecialchars(trim($_POST['surname']));
 $patronymic = htmlspecialchars(trim($_POST['patronymic']));
 $phoneNumber = htmlspecialchars(trim($_POST['phoneNumber']));
-$id = htmlspecialchars(trim($_POST['id']));
+$id = mb_strtoupper(htmlspecialchars(trim($_POST['id'])));
 $clinic = htmlspecialchars(trim($_POST['clinic']));
 $district = htmlspecialchars(trim($_POST['district']));
 $street = htmlspecialchars(trim($_POST['street']));
@@ -26,15 +25,28 @@ $user = new RegUser($name, $surname, $patronymic, $phoneNumber, $id, $clinic, $d
 
 $error = false;
 
+$db_id = '';
+if(isset($_SESSION['id']))
+    $db_id = $_SESSION['id'];
+else if(isset($_COOKIE['id']))
+    $db_id = $_COOKIE['id'];
+
+$command = "SELECT * FROM Users WHERE id = '$db_id'";
+$currentUser = mysqli_fetch_row(mysqli_query($con, $command));
+
+setcookie('surname', $surname, 0);
+setcookie('name', $name, 0);
+setcookie('id', $id, 0);
+
 ?>
 
 <!doctype html>
 <html>
     <head>
-        <title>Health - Регистрация</title>
+        <title>Health - Профиль</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link href="../css/register.css" rel="stylesheet">
+        <link href="../css/profile.css" rel="stylesheet">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@500&display=swap" rel="stylesheet">
@@ -43,31 +55,65 @@ $error = false;
     <body>
         <div class="container-1">
             <div class="container-2">
-                <div class="logo-block">
-                    <a href="main_page.php">
-                        <img src="../img/heart.png" width="110px">
-                    </a>
+                <header>
+                    <div class="header-left-part">
+                        <a href="main_page.php">
+                            <img src="../img/heart.png" width="110px">
+                        </a>
+                        <div class="header-title">
+                            <p class="header-title-part1">Health</p>
+                            <p>Частная клинка</p>
+                        </div>
+                    </div>
+                    <div class="header-right-part">
+<?php
+
+if(isset($_SESSION['name']))
+{
+    echo "<img src=\"../img/user.png\" width=\"50px\">
+          <div class=\"profile-part\">
+                <p class=\"profile-part-welcome\">".$_SESSION['name']." ".$_SESSION['surname']."</p>
+                <a href=\"logout.php\"><p>Выйти из учетной записи</p></a>
+          </div>";
+}
+else if(isset($_COOKIE['name']))
+{
+    echo "<img src=\"../img/user.png\" width=\"50px\">
+          <div class=\"profile-part\">
+                <p class=\"profile-part-welcome\">".$_COOKIE['name']." ".$_COOKIE['surname']."</p>
+                <a href=\"logout.php\"><p>Выйти из учетной записи</p></a>
+          </div>";
+}
+
+?>                      
+                    </div>
+                </header>
+                <div class="profile-menu">
+                    <p class="profile-menu-title">Личный кабинет</p>
+                    <a href="personal_page_profile.php"><p class="current-page">Профиль</p></a>
+                    <a><p>Талоны</p></a>
+                    <a><p>Осмотры врачей</p></a>
+                    <a><p>Лабораторные исследования</p></a>
                 </div>
-                <p class="form-title">Регистрация</p>
-                
+
                 <div class="container-3">
-                    <form action="registerCheck.php" method="post">
+                    <form action="updateUser.php" method="post">
                         <div class="inputs-block">
                             <div>
                                 <p class="input-label">Имя</p>
                                 <?php
                                     if(!$user->formatCheck($name))
                                     {
-                                        echo "<input class=\"error-input\" name=\"name\" placeholder=\"Иван\" required><p class=\"error\">* Поле должно содержать только буквы</p>";
+                                        echo "<input class=\"error-input\" name=\"name\" value=\"".$currentUser[1]."\" required><p class=\"error\">* Поле должно содержать только буквы</p>";
                                         $error = true;
                                     }
                                     else if(!$user->lenCheck($name))
                                     {
-                                        echo "<input class=\"error-input\" name=\"name\" placeholder=\"Иван\" required><p class=\"error\">* Не более 100 символов</p>";
+                                        echo "<input class=\"error-input\" name=\"name\" value=\"".$currentUser[1]."\" required><p class=\"error\">* Не более 100 символов</p>";
                                         $error = true;
                                     }
                                     else
-                                        echo "<input name=\"name\" placeholder=\"Иван\" required>";
+                                        echo "<input name=\"name\" value=\"".$currentUser[1]."\" required>";
                                 ?>
                             </div>
                             <div>
@@ -75,11 +121,11 @@ $error = false;
                                 <?php
                                     if(!$user->phoneNumberCheck())
                                     {
-                                        echo "<input class=\"error-input\" name=\"phoneNumber\" placeholder=\"+375(XX)XXX-XX-XX\" required><p class=\"error\">* Неверный формат</p>";
+                                        echo "<input class=\"error-input\" name=\"phoneNumber\" value=\"".$currentUser[3]."\" required><p class=\"error\">* Неверный формат</p>";
                                         $error = true;
                                     }
                                     else
-                                        echo "<input name=\"phoneNumber\" placeholder=\"+375(XX)XXX-XX-XX\" required>";
+                                        echo "<input name=\"phoneNumber\" value=\"".$currentUser[3]."\" required>";
                                 ?>
                             </div>
                         </div>
@@ -89,45 +135,44 @@ $error = false;
                                 <?php
                                     if(!$user->formatCheck($surname))
                                     {
-                                        echo "<input class=\"error-input\" name=\"surname\" placeholder=\"Иванов\" required><p class=\"error\">* Поле должно содержать только буквы</p>";
+                                        echo "<input class=\"error-input\" name=\"surname\" value=\"".$currentUser[0]."\" required><p class=\"error\">* Поле должно содержать только буквы</p>";
                                         $error = true;
                                     }
                                     else if(!$user->lenCheck($surname))
                                     {
-                                        echo "<input class=\"error-input\" name=\"surname\" placeholder=\"Иванов\" required><p class=\"error\">* Не более 100 символов</p>";
+                                        echo "<input class=\"error-input\" name=\"surname\" value=\"".$currentUser[0]."\" required><p class=\"error\">* Не более 100 символов</p>";
                                         $error = true;
                                     }
                                     else
-                                        echo "<input name=\"surname\" placeholder=\"Иванов\" required>";
+                                        echo "<input name=\"surname\" value=\"".$currentUser[0]."\" required>";
                                 ?>
                             </div>
                             <div>
                                 <p class="input-label">Идентификационный номер</p>
                                 <?php
-                                    $id = mb_strtoupper($id);
                                     $existsId = "SELECT * FROM Users WHERE id = '$id'";
                                     if(!$user->idFormatCheck())
                                     {
-                                        echo "<input class=\"error-input\" name=\"id\" placeholder=\"XXXXXXXXXXXXXX\" required><p class=\"error\">* Только англ. буквы и цифры</p>";
+                                        echo "<input class=\"error-input\" name=\"id\" value=\"".$currentUser[4]."\" required><p class=\"error\">* Только англ. буквы и цифры</p>";
                                         $error = true;
                                     }
                                     else if(!$user->idLenCheck())
                                     {
-                                        echo "<input class=\"error-input\" name=\"id\" placeholder=\"XXXXXXXXXXXXXX\" required><p class=\"error\">* Не менее 14 символов</p>";
+                                        echo "<input class=\"error-input\" name=\"id\" value=\"".$currentUser[4]."\" required><p class=\"error\">* Не менее 14 символов</p>";
                                         $error = true;
                                     }
                                     else if(!$user->lenCheck($id))
                                     {
-                                        echo "<input class=\"error-input\" name=\"id\" placeholder=\"XXXXXXXXXXXXXX\" required><p class=\"error\">* Не более 100 символов</p>";
+                                        echo "<input class=\"error-input\" name=\"id\" value=\"".$currentUser[4]."\" required><p class=\"error\">* Не более 100 символов</p>";
                                         $error = true;
                                     }
-                                    else if(mysqli_fetch_row(mysqli_query($con, $existsId)))
+                                    else if(mysqli_fetch_row(mysqli_query($con, $existsId)) && ($db_id != $id))
                                     {
-                                        echo "<input class=\"error-input\" name=\"id\" placeholder=\"XXXXXXXXXXXXXX\" required><p class=\"error\">* Уже зарегистрирован</p>";
+                                        echo "<input class=\"error-input\" name=\"id\" value=\"".$currentUser[4]."\" required><p class=\"error\">* Уже зарегистрирован</p>";
                                         $error = true;
                                     }
                                     else
-                                        echo "<input name=\"id\" placeholder=\"XXXXXXXXXXXXXX\" required>";
+                                        echo "<input name=\"id\" value=\"".$currentUser[4]."\" required>";
                                 ?>
                             </div>
                         </div>
@@ -137,16 +182,16 @@ $error = false;
                                 <?php
                                     if(!$user->formatCheck($surname))
                                     {
-                                        echo "<input class=\"error-input\" name=\"patronymic\" placeholder=\"Иванович\" required><p class=\"error\">* Поле должно содержать только буквы</p>";
+                                        echo "<input class=\"error-input\" name=\"patronymic\" value=\"".$currentUser[2]."\" required><p class=\"error\">* Поле должно содержать только буквы</p>";
                                         $error = true;
                                     }
                                     else if(!$user->lenCheck($surname))
                                     {
-                                        echo "<input class=\"error-input\" name=\"patronymic\" placeholder=\"Иванович\" required><p class=\"error\">* Не более 100 символов</p>";
+                                        echo "<input class=\"error-input\" name=\"patronymic\" value=\"".$currentUser[2]."\"  required><p class=\"error\">* Не более 100 символов</p>";
                                         $error = true;
                                     }
                                     else
-                                        echo "<input name=\"patronymic\" placeholder=\"Иванович\" required>";
+                                        echo "<input name=\"patronymic\" value=\"".$currentUser[2]."\"  required>";
                                 ?>
                             </div>
                             <div>
@@ -154,16 +199,16 @@ $error = false;
                                 <?php
                                     if(!ctype_digit($clinic))
                                     {
-                                        echo "<input class=\"error-input\" name=\"clinic\" placeholder=\"25\" required><p class=\"error\">* Поле должно содержать только цифры</p>";
+                                        echo "<input class=\"error-input\" name=\"clinic\" value=\"".$currentUser[5]."\"  required><p class=\"error\">* Поле должно содержать только цифры</p>";
                                         $error = true;
                                     }
                                     else if(strlen($clinic) > 3)
                                     {
-                                        echo "<input class=\"error-input\" name=\"clinic\" placeholder=\"25\" required><p class=\"error\">* Неверный номер</p>";
+                                        echo "<input class=\"error-input\" name=\"clinic\" value=\"".$currentUser[5]."\" required><p class=\"error\">* Неверный номер</p>";
                                         $error = true;
                                     }
                                     else
-                                        echo "<input name=\"clinic\" placeholder=\"25\" required>";
+                                        echo "<input name=\"clinic\" value=\"".$currentUser[5]."\" required>";
                                 ?>
                             </div>
                         </div>
@@ -276,7 +321,7 @@ $error = false;
                         </div>
 
                         <div class="button-block">
-                            <input class="button" type="submit" value="Зарегистрироваться">
+                            <input class="button" type="submit" value="Изменить">
                         </div>
                     </form>
                     <div class="cancel-block">
@@ -291,7 +336,7 @@ $error = false;
 <?php
 
 if(!$error)
-{
+{        
     $name = mb_strtoupper(mb_substr($name, 0, 1)).mb_substr($name, 1);
     $surname = mb_strtoupper(mb_substr($surname, 0, 1)).mb_substr($surname, 1);
     $patronymic = mb_strtoupper(mb_substr($patronymic, 0, 1)).mb_substr($patronymic, 1);
@@ -300,18 +345,19 @@ if(!$error)
     $password = base64_encode(md5($password));
     
     if(($build == "") && ($apartment == ""))
-        $addNewUser = "INSERT INTO Users(surname, name, patronymic, phone_number, id, clinic, address, password) VALUES('$surname', '$name', '$patronymic', '$phoneNumber', '$id', '$clinic', '$district район, ул. $street $house', '$password')";
+        $updateUser = "UPDATE Users SET surname = '$surname', name = '$name', patronymic = '$patronymic', phone_number = '$phoneNumber', id = '$id', clinic = '$clinic', address = '$district район, ул. $street $house', password = '$password' WHERE id = '$db_id'";
     else if($build == "")
-        $addNewUser = "INSERT INTO Users(surname, name, patronymic, phone_number, id, clinic, address, password) VALUES('$surname', '$name', '$patronymic', '$phoneNumber', '$id', '$clinic', '$district район, ул. $street $house, кв. $apartment', '$password')";
+        $updateUser = "UPDATE Users SET surname = '$surname', name = '$name', patronymic = '$patronymic', phone_number = '$phoneNumber', id = '$id', clinic = '$clinic', address = '$district район, ул. $street $house, кв. $apartment', password = '$password' WHERE id = '$db_id'";
     else
-        $addNewUser = "INSERT INTO Users(surname, name, patronymic, phone_number, id, clinic, address, password) VALUES('$surname', '$name', '$patronymic', '$phoneNumber', '$id', '$clinic', '$district район, ул. $street $house, корп. $build, кв. $apartment', '$password')";
+        $updateUser = "UPDATE Users SET surname = '$surname', name = '$name', patronymic = '$patronymic', phone_number = '$phoneNumber', id = '$id', clinic = '$clinic', address = '$district район, ул. $street $house, корп. $build, кв. $apartment', password = '$password' WHERE id = '$db_id'";
     
-    mysqli_query($con, $addNewUser);
+    mysqli_query($con, $updateUser);
     mysqli_close($con);
-    echo "<script>Swal.fire('Вы успешно зарегистрированы!', '', 'success');</script>
-        <script>
-            setTimeout(function(){ window.location.replace(\"http://localhost:8080/health/php/login.php\"); }, 3000);
-        </script>";
+    
+    $_SESSION['surname'] = $surname;
+    $_SESSION['name'] = $name;
+    $_SESSION['id'] = $id;
+    echo "<script>Swal.fire('Данные успешно изменены!', '', 'success');</script>";
 }
 
 ?>

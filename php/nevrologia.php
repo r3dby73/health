@@ -14,7 +14,7 @@
             <div class="container-2">
                 <header>
                     <div class="header-left-part">
-                        <a href="main_page.html">
+                        <a href="../php/main_page.php">
                             <img src="../img/heart.png" width="110px">
                         </a>
                         <div class="header-title">
@@ -23,12 +23,38 @@
                         </div>
                     </div>
                     <div class="header-right-part">
-                        <a href="login.html">
-                            <input type="submit" value="Войти">
-                        </a>
-                        <a href="register.html">
-                            <input type="submit" value="Зарегистрироваться">
-                        </a>
+<?php
+    
+session_start();
+if(isset($_SESSION['name']))
+{
+    echo "<img src=\"../img/user.png\" width=\"50px\">
+          <div class=\"profile-part\">
+                <p class=\"profile-part-welcome\">".$_SESSION['name']." ".$_SESSION['surname']."</p>
+                <a href=\"personal_page_profile.php\"><p>Личный кабинет</p></a>
+                <a href=\"logout.php\"><p>Выйти из учетной записи</p></a>
+          </div>";
+}
+else if(isset($_COOKIE['name']))
+{
+    echo "<img src=\"../img/user.png\" width=\"50px\">
+          <div class=\"profile-part\">
+                <p class=\"profile-part-welcome\">".$_COOKIE['name']." ".$_COOKIE['surname']."</p>
+                <a href=\"personal_page_profile.php\"><p>Личный кабинет</p></a>
+                <a href=\"logout.php\"><p>Выйти из учетной записи</p></a>
+          </div>";
+}
+else
+{
+    echo "<a href=\"login.php\">
+                <input type=\"submit\" value=\"Войти\">
+          </a>
+          <a href=\"register.php\">
+                <input type=\"submit\" value=\"Зарегистрироваться\">
+          </a>";
+}
+
+?>
                     </div>
                 </header>
                 
@@ -39,7 +65,7 @@
                         <p class="main-info-text">Невролог — это узкоспециализированный специалист, занимающийся профилактикой, диагностикой и устранением патологий центральной и периферической нервной системы. Неврология затрагивает все внутренние органы, поскольку нервная система регулирует деятельность всего организма. Сбои в нервной регуляции ведут к различным симптомам, существенно снижающим качество жизни пациента.</p>
                         
                         <div class="input-more">
-                            <a href="nevrologia_more.html">
+                            <a href="nevrologia_more.php">
                                 <input type="submit" value="Подробнее">
                             </a>
                         </div>

@@ -1,3 +1,11 @@
+<?php
+
+session_start();
+if(isset($_SESSION['name']) || isset($_COOKIE['name']))
+    header("Location: http://localhost:8080/health/php/main_page.php");
+
+?>
+
 <!doctype html>
 <html>
     <head>
@@ -13,13 +21,13 @@
         <div class="container-1">
             <div class="container-2">
                 <div class="logo-block">
-                    <a href="main_page.html">
+                    <a href="main_page.php">
                         <img src="../img/heart.png" width="110px">
                     </a>
                 </div>
                 <p class="form-title">Авторизация</p>
                 
-                <form class="container-3" action="../php/loginCheck.php" method="post">
+                <form class="container-3" action="loginCheck.php" method="post">
                     <p class="input-label">Номер телефона</p>
                     <input name="phoneNumber" required>
                     <p class="input-label">Пароль</p>
@@ -28,7 +36,7 @@
                         <input class="button" type="submit" value="Войти">
                     </div>
                     <div class="cancel-block">
-                        <a href="main_page.html">Отмена</a>
+                        <a href="main_page.php">Отмена</a>
                     </div>
                 </form>
             </div>
