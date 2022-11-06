@@ -173,7 +173,15 @@ $error = false;
                             <div class="inputs-block-group">
                                 <div>
                                     <p class="input-label">Улица</p>
-                                    <input class="input-street" name="street" placeholder="Пушкина" required>
+                                    <?php
+                                        if(!$user->lenCheck($street))
+                                        {
+                                            echo "<input  class=\"error-input input-street input-absolute\" name=\"street\" placeholder=\"Пушкина\" required><p class=\"error error-absolute\">* Не более 100 символов</p>";
+                                            $error = true;
+                                        }
+                                        else
+                                            echo "<input class=\"input-street\" name=\"street\" placeholder=\"Пушкина\" required>";
+                                    ?>
                                 </div>
                                 <div>
                                     <p class="input-label">Дом</p>

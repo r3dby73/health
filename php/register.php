@@ -43,7 +43,7 @@ if(isset($_SESSION['name']) || isset($_COOKIE['name']))
                         <div class="inputs-block">
                             <div>
                                 <p class="input-label">Фамилия</p>
-                                <input name="surname" placeholder="Иванов">
+                                <input name="surname" placeholder="Иванов" required>
                             </div>
                             <div>
                                 <p class="input-label">Идентификационный номер</p>
@@ -53,7 +53,7 @@ if(isset($_SESSION['name']) || isset($_COOKIE['name']))
                         <div class="inputs-block">
                             <div>
                                 <p class="input-label">Отчество</p>
-                                <input name="patronymic" placeholder="Иванович" required>
+                                <input name="patronymic" placeholder="Иванович">
                             </div>
                             <div>
                                 <p class="input-label">Обслуживающая поликлиника</p>
