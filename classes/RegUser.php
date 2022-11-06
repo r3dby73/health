@@ -36,7 +36,7 @@ class RegUser
     
     public function phoneNumberCheck()
     {
-        if(preg_match('/\+375\((25|29|33|44)\)[0-9]{3}\-[0-9]{2}\-[0-9]{2}/', $this->phoneNumber))
+        if(preg_match('/\+375(25|29|33|44)[0-9]{3}[0-9]{2}[0-9]{2}/', $this->phoneNumber))
             return true;
         else
             return false;

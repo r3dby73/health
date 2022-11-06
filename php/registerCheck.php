@@ -56,12 +56,7 @@ $error = false;
                             <div>
                                 <p class="input-label">Имя</p>
                                 <?php
-                                    if(!$user->formatCheck($name))
-                                    {
-                                        echo "<input class=\"error-input\" name=\"name\" placeholder=\"Иван\" required><p class=\"error\">* Поле должно содержать только буквы</p>";
-                                        $error = true;
-                                    }
-                                    else if(!$user->lenCheck($name))
+                                    if(!$user->lenCheck($name))
                                     {
                                         echo "<input class=\"error-input\" name=\"name\" placeholder=\"Иван\" required><p class=\"error\">* Не более 100 символов</p>";
                                         $error = true;
@@ -75,11 +70,11 @@ $error = false;
                                 <?php
                                     if(!$user->phoneNumberCheck())
                                     {
-                                        echo "<input class=\"error-input\" name=\"phoneNumber\" placeholder=\"+375(XX)XXX-XX-XX\" required><p class=\"error\">* Неверный формат</p>";
+                                        echo "<input class=\"error-input\" name=\"phoneNumber\" placeholder=\"+375XXXXXXXXX\" required><p class=\"error\">* Неверный формат</p>";
                                         $error = true;
                                     }
                                     else
-                                        echo "<input name=\"phoneNumber\" placeholder=\"+375(XX)XXX-XX-XX\" required>";
+                                        echo "<input name=\"phoneNumber\" placeholder=\"+375XXXXXXXXX\" required>";
                                 ?>
                             </div>
                         </div>
@@ -87,12 +82,7 @@ $error = false;
                             <div>
                                 <p class="input-label">Фамилия</p>
                                 <?php
-                                    if(!$user->formatCheck($surname))
-                                    {
-                                        echo "<input class=\"error-input\" name=\"surname\" placeholder=\"Иванов\" required><p class=\"error\">* Поле должно содержать только буквы</p>";
-                                        $error = true;
-                                    }
-                                    else if(!$user->lenCheck($surname))
+                                    if(!$user->lenCheck($surname))
                                     {
                                         echo "<input class=\"error-input\" name=\"surname\" placeholder=\"Иванов\" required><p class=\"error\">* Не более 100 символов</p>";
                                         $error = true;
@@ -135,18 +125,13 @@ $error = false;
                             <div>
                                 <p class="input-label">Отчество</p>
                                 <?php
-                                    if(!$user->formatCheck($surname))
+                                    if(!$user->lenCheck($surname))
                                     {
-                                        echo "<input class=\"error-input\" name=\"patronymic\" placeholder=\"Иванович\" required><p class=\"error\">* Поле должно содержать только буквы</p>";
-                                        $error = true;
-                                    }
-                                    else if(!$user->lenCheck($surname))
-                                    {
-                                        echo "<input class=\"error-input\" name=\"patronymic\" placeholder=\"Иванович\" required><p class=\"error\">* Не более 100 символов</p>";
+                                        echo "<input class=\"error-input\" name=\"patronymic\" placeholder=\"Иванович\"><p class=\"error\">* Не более 100 символов</p>";
                                         $error = true;
                                     }
                                     else
-                                        echo "<input name=\"patronymic\" placeholder=\"Иванович\" required>";
+                                        echo "<input name=\"patronymic\" placeholder=\"Иванович\">";
                                 ?>
                             </div>
                             <div>
@@ -188,20 +173,7 @@ $error = false;
                             <div class="inputs-block-group">
                                 <div>
                                     <p class="input-label">Улица</p>
-                                    <?php
-                                        if(!$user->formatCheck($street))
-                                        {
-                                            echo "<input class=\"error-input input-street input-absolute\" name=\"street\" placeholder=\"Пушкина\" required><p class=\"error error-absolute\">* Поле должно содержать только буквы</p>";
-                                            $error = true;
-                                        }
-                                        else if(!$user->lenCheck($street))
-                                        {
-                                            echo "<input  class=\"error-input input-street input-absolute\" name=\"street\" placeholder=\"Пушкина\" required><p class=\"error error-absolute\">* Не более 100 символов</p>";
-                                            $error = true;
-                                        }
-                                        else
-                                            echo "<input class=\"input-street\" name=\"street\" placeholder=\"Пушкина\" required>";
-                                    ?>
+                                    <input class="input-street" name="street" placeholder="Пушкина" required>
                                 </div>
                                 <div>
                                     <p class="input-label">Дом</p>

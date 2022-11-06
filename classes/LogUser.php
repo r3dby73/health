@@ -1,7 +1,5 @@
 <?php
 
-session_start();
-
 class LogUser
 {
     private string $phoneNumber, $password;

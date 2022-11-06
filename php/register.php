@@ -37,13 +37,13 @@ if(isset($_SESSION['name']) || isset($_COOKIE['name']))
                             </div>
                             <div>
                                 <p class="input-label">Номер телефона</p>
-                                <input name="phoneNumber" placeholder="+375(XX)XXX-XX-XX" required>
+                                <input name="phoneNumber" placeholder="+375XXXXXXXXX" required>
                             </div>
                         </div>
                         <div class="inputs-block">
                             <div>
                                 <p class="input-label">Фамилия</p>
-                                <input name="surname" placeholder="Иванов" required>
+                                <input name="surname" placeholder="Иванов">
                             </div>
                             <div>
                                 <p class="input-label">Идентификационный номер</p>

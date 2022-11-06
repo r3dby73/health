@@ -90,10 +90,10 @@ else if(isset($_COOKIE['name']))
                 </header>
                 <div class="profile-menu">
                     <p class="profile-menu-title">Личный кабинет</p>
-                    <a href="personal_page_profile.php"><p class="current-page">Профиль</p></a>
-                    <a><p>Талоны</p></a>
-                    <a><p>Осмотры врачей</p></a>
-                    <a><p>Лабораторные исследования</p></a>
+                    <p><a class="profile-menu-a current-page" href="personal_page_profile.php">Профиль</a></p>
+                    <p><a class="profile-menu-a">Талоны</a></p>
+                    <p><a class="profile-menu-a">Осмотры врачей</a></p>
+                    <p><a class="profile-menu-a" href="pp_lab.php">Лабораторные исследования</a></p>
                 </div>
 
                 <div class="container-3">
@@ -102,12 +102,7 @@ else if(isset($_COOKIE['name']))
                             <div>
                                 <p class="input-label">Имя</p>
                                 <?php
-                                    if(!$user->formatCheck($name))
-                                    {
-                                        echo "<input class=\"error-input\" name=\"name\" value=\"".$currentUser[1]."\" required><p class=\"error\">* Поле должно содержать только буквы</p>";
-                                        $error = true;
-                                    }
-                                    else if(!$user->lenCheck($name))
+                                    if(!$user->lenCheck($name))
                                     {
                                         echo "<input class=\"error-input\" name=\"name\" value=\"".$currentUser[1]."\" required><p class=\"error\">* Не более 100 символов</p>";
                                         $error = true;
@@ -133,12 +128,7 @@ else if(isset($_COOKIE['name']))
                             <div>
                                 <p class="input-label">Фамилия</p>
                                 <?php
-                                    if(!$user->formatCheck($surname))
-                                    {
-                                        echo "<input class=\"error-input\" name=\"surname\" value=\"".$currentUser[0]."\" required><p class=\"error\">* Поле должно содержать только буквы</p>";
-                                        $error = true;
-                                    }
-                                    else if(!$user->lenCheck($surname))
+                                    if(!$user->lenCheck($surname))
                                     {
                                         echo "<input class=\"error-input\" name=\"surname\" value=\"".$currentUser[0]."\" required><p class=\"error\">* Не более 100 символов</p>";
                                         $error = true;
@@ -180,18 +170,13 @@ else if(isset($_COOKIE['name']))
                             <div>
                                 <p class="input-label">Отчество</p>
                                 <?php
-                                    if(!$user->formatCheck($surname))
+                                    if(!$user->lenCheck($surname))
                                     {
-                                        echo "<input class=\"error-input\" name=\"patronymic\" value=\"".$currentUser[2]."\" required><p class=\"error\">* Поле должно содержать только буквы</p>";
-                                        $error = true;
-                                    }
-                                    else if(!$user->lenCheck($surname))
-                                    {
-                                        echo "<input class=\"error-input\" name=\"patronymic\" value=\"".$currentUser[2]."\"  required><p class=\"error\">* Не более 100 символов</p>";
+                                        echo "<input class=\"error-input\" name=\"patronymic\" value=\"".$currentUser[2]."\"><p class=\"error\">* Не более 100 символов</p>";
                                         $error = true;
                                     }
                                     else
-                                        echo "<input name=\"patronymic\" value=\"".$currentUser[2]."\"  required>";
+                                        echo "<input name=\"patronymic\" value=\"".$currentUser[2]."\">";
                                 ?>
                             </div>
                             <div>
@@ -234,12 +219,7 @@ else if(isset($_COOKIE['name']))
                                 <div>
                                     <p class="input-label">Улица</p>
                                     <?php
-                                        if(!$user->formatCheck($street))
-                                        {
-                                            echo "<input class=\"error-input input-street input-absolute\" name=\"street\" placeholder=\"Пушкина\" required><p class=\"error error-absolute\">* Поле должно содержать только буквы</p>";
-                                            $error = true;
-                                        }
-                                        else if(!$user->lenCheck($street))
+                                        if(!$user->lenCheck($street))
                                         {
                                             echo "<input  class=\"error-input input-street input-absolute\" name=\"street\" placeholder=\"Пушкина\" required><p class=\"error error-absolute\">* Не более 100 символов</p>";
                                             $error = true;

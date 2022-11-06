@@ -104,7 +104,7 @@ else if(isset($_COOKIE['name']))
                             <div>
                                 <p class="input-label">Отчество</p>
                                 <?php
-                                    echo "<input name=\"patronymic\" value=\"".$currentUser[2]."\" required>";
+                                    echo "<input name=\"patronymic\" value=\"".$currentUser[2]."\">";
                                 ?>
                             </div>
                             <div>
