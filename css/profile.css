@@ -113,6 +113,11 @@ header {
     margin-bottom: 30px;
 }
 
+.container-table {
+    height: 250px;
+    overflow-y: auto;
+}
+
 .input-label {
     font-size: 19px;
     margin: 0px 0px 5px 0px;
@@ -208,4 +213,20 @@ tbody tr {
 tbody tr:hover {
     cursor: pointer;
     background-color: #B5BBCA;
+}
+
+
+
+::-webkit-scrollbar {
+    width: 13px;
+}
+
+::-webkit-scrollbar-track {
+    background-color: #BCC4D0;
+}
+
+::-webkit-scrollbar-thumb {
+    background: darkgrey;
+    border-radius: 8px;
+    border: 3px solid #BCC4D0;
 }

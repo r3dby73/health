@@ -92,7 +92,7 @@ else if(isset($_COOKIE['name']))
                     <p class="profile-menu-title">Личный кабинет</p>
                     <p><a class="profile-menu-a current-page" href="personal_page_profile.php">Профиль</a></p>
                     <p><a class="profile-menu-a">Талоны</a></p>
-                    <p><a class="profile-menu-a">Осмотры врачей</a></p>
+                    <p><a class="profile-menu-a" href="pp_ov.php">Осмотры врачей</a></p>
                     <p><a class="profile-menu-a" href="pp_lab.php">Лабораторные исследования</a></p>
                 </div>
 

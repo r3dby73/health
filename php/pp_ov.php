@@ -69,17 +69,18 @@ else if(isset($_COOKIE['name']))
                     <p class="profile-menu-title">Личный кабинет</p>
                     <p><a class="profile-menu-a" href="personal_page_profile.php">Профиль</a></p>
                     <p><a class="profile-menu-a">Талоны</a></p>
-                    <p><a class="profile-menu-a" href="pp_ov.php">Осмотры врачей</a></p>
-                    <p><a class="profile-menu-a current-page" href="pp_lab.php">Лабораторные исследования</a></p>
+                    <p><a class="profile-menu-a current-page" href="pp_ov.php">Осмотры врачей</a></p>
+                    <p><a class="profile-menu-a" href="pp_lab.php">Лабораторные исследования</a></p>
                 </div>
                 <div class="container-table">
                     <table class="table">
                         <thead class="thead-dark">
                             <tr>
                                 <th scope="col">#</th>
-                                <th scope="col">Название</th>
-                                <th scope="col">Дата</th>
+                                <th scope="col">Направление</th>
                                 <th scope="col">ФИО врача</th>
+                                <th scope="col">Дата</th>
+                                <th scope="col">Краткий диагноз</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -89,17 +90,18 @@ else if(isset($_COOKIE['name']))
                                     $id = $_SESSION['id'];
                                 else
                                     $id = $_COOKIE['id'];
-                                $command = "SELECT * FROM analyzes WHERE user_id = '$id' ORDER BY date_ DESC";
+                                $command = "SELECT * FROM health_checks WHERE user_id = '$id' ORDER BY date_ DESC";
                                 $res = mysqli_query($con, $command);
                                 $i = 1;
-                                while($analysis = mysqli_fetch_array($res))
+                                while($hckeck = mysqli_fetch_array($res))
                                 {
                                     echo "
-                                        <tr onclick=\"window.location.href='$analysis[4]'\">
+                                        <tr onclick=\"window.location.href='$hckeck[5]'\">
                                             <th scope=\"row\">".$i."</th>
-                                            <td>$analysis[1]</td>
-                                            <td>".substr($analysis[2], 0, 10)."</td>
-                                            <td>$analysis[3]</td>
+                                            <td>$hckeck[1]</td>
+                                            <td>$hckeck[2]</td>
+                                            <td>".substr($hckeck[3], 0, 10)."</td>
+                                            <td>$hckeck[4]</td>
                                         </tr>";
                                     $i++;
                                 }
