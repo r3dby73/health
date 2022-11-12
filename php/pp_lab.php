@@ -83,24 +83,27 @@ else if(isset($_COOKIE['name']))
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <th scope="row">1</th>
-                                <td>Mark</td>
-                                <td>Otto</td>
-                                <td>@mdo</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">2</th>
-                                <td>Jacob</td>
-                                <td>Thornton</td>
-                                <td>@fat</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">3</th>
-                                <td>Larry</td>
-                                <td>the Bird</td>
-                                <td>@twitter</td>
-                            </tr>
+                            <?php
+                                $id = "";
+                                if(isset($_SESSION['id']))
+                                    $id = $_SESSION['id'];
+                                else
+                                    $id = $_COOKIE['id'];
+                                $command = "SELECT * FROM analyzes WHERE user_id = '$id' ORDER BY date_ DESC";
+                                $res = mysqli_query($con, $command);
+                                $i = 1;
+                                while($analysis = mysqli_fetch_array($res))
+                                {
+                                    echo "
+                                        <tr onclick=\"window.location.href='$analysis[4]'\">
+                                            <th scope=\"row\">".$i."</th>
+                                            <td>$analysis[1]</td>
+                                            <td>".substr($analysis[2], 0, 10)."</td>
+                                            <td>$analysis[3]</td>
+                                        </tr>";
+                                    $i++;
+                                }
+                            ?>
                         </tbody>
                     </table>
                 </div>

@@ -200,3 +200,7 @@ input {
 .input-absolute {
     margin-bottom: 40px;
 }
+
+tbody tr:hover {
+    cursor: pointer;
+}

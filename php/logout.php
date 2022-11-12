@@ -1,7 +1,7 @@
 <?php
 
 session_start();
-unset($_SESSION['name'], $_SESSION['surname'], $_SESSION['id']);
+session_unset();
 setcookie('surname', null, -1);
 setcookie('name', null, -1);
 setcookie('id', null, -1);
