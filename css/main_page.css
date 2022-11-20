@@ -190,3 +190,18 @@ input[type="submit"]:hover{
 .profile-part a p {
     margin: 8px 0px 0px 0px;
 }
+
+
+::-webkit-scrollbar {
+    width: 13px;
+}
+
+::-webkit-scrollbar-track {
+    background-color: #BCC4D0;
+}
+
+::-webkit-scrollbar-thumb {
+    background: darkgrey;
+    border-radius: 8px;
+    border: 3px solid #BCC4D0;
+}

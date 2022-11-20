@@ -5,14 +5,11 @@ require_once "db_con.php";
 if(!isset($_SESSION['name']) && !isset($_COOKIE['name']))
     header("Location: http://localhost:8080/health/php/login.php");
 
-$db_id = '';
-    if(isset($_SESSION['id']))
-        $db_id = $_SESSION['id'];
-    else if(isset($_COOKIE['id']))
-        $db_id = $_COOKIE['id'];
-
-$command = "SELECT * FROM Users WHERE id = '$db_id'";
-$currentUser = mysqli_fetch_row(mysqli_query($con, $command));
+$id = '';
+if(isset($_SESSION['id']))
+    $id = $_SESSION['id'];
+else if(isset($_COOKIE['id']))
+    $id = $_COOKIE['id'];
 
 ?>
 
@@ -68,7 +65,7 @@ else if(isset($_COOKIE['name']))
                 <div class="profile-menu">
                     <p class="profile-menu-title">Личный кабинет</p>
                     <p><a class="profile-menu-a" href="personal_page_profile.php">Профиль</a></p>
-                    <p><a class="profile-menu-a">Талоны</a></p>
+                    <p><a class="profile-menu-a" href="pp_myTickets.php">Талоны</a></p>
                     <p><a class="profile-menu-a current-page" href="pp_ov.php">Осмотры врачей</a></p>
                     <p><a class="profile-menu-a" href="pp_lab.php">Лабораторные исследования</a></p>
                 </div>
@@ -85,11 +82,6 @@ else if(isset($_COOKIE['name']))
                         </thead>
                         <tbody>
                             <?php
-                                $id = "";
-                                if(isset($_SESSION['id']))
-                                    $id = $_SESSION['id'];
-                                else
-                                    $id = $_COOKIE['id'];
                                 $command = "SELECT * FROM health_checks WHERE user_id = '$id' ORDER BY date_ DESC";
                                 $res = mysqli_query($con, $command);
                                 $i = 1;

@@ -65,33 +65,41 @@ else if(isset($_COOKIE['name']))
                 <div class="profile-menu">
                     <p class="profile-menu-title">Личный кабинет</p>
                     <p><a class="profile-menu-a" href="personal_page_profile.php">Профиль</a></p>
-                    <p><a class="profile-menu-a" href="pp_myTickets.php">Талоны</a></p>
+                    <p><a class="profile-menu-a current-page" href="pp_myTickets.php">Талоны</a></p>
                     <p><a class="profile-menu-a" href="pp_ov.php">Осмотры врачей</a></p>
-                    <p><a class="profile-menu-a current-page" href="pp_lab.php">Лабораторные исследования</a></p>
+                    <p><a class="profile-menu-a" href="pp_lab.php">Лабораторные исследования</a></p>
                 </div>
                 <div class="container-table">
+                    <form action="" class="filter">
+                        <input class="input-filter" placeholder="Нарпавление">
+                        <input class="input-filter" placeholder="ФИО врача">
+                        <input class="input-filter" placeholder="Дата">
+                        <input class="input-filter" placeholder="Время">
+                    </form>
                     <table class="table">
                         <thead class="thead-dark">
                             <tr>
                                 <th scope="col">#</th>
-                                <th scope="col">Название</th>
-                                <th scope="col">Дата</th>
+                                <th scope="col">Направление</th>
                                 <th scope="col">ФИО врача</th>
+                                <th scope="col">Дата</th>
+                                <th scope="col">Время</th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php
-                                $command = "SELECT * FROM analyzes WHERE user_id = '$id' ORDER BY date_ DESC";
+                                $command = "SELECT * FROM tickets WHERE user_id = '$id' ORDER BY date_ DESC";
                                 $res = mysqli_query($con, $command);
                                 $i = 1;
-                                while($analysis = mysqli_fetch_array($res))
+                                while($hckeck = mysqli_fetch_array($res))
                                 {
                                     echo "
-                                        <tr onclick=\"window.location.href='$analysis[4]'\">
+                                        <tr>
                                             <th scope=\"row\">".$i."</th>
-                                            <td>$analysis[1]</td>
-                                            <td>".substr($analysis[2], 0, 10)."</td>
-                                            <td>$analysis[3]</td>
+                                            <td>$hckeck[2]</td>
+                                            <td>$hckeck[3]</td>
+                                            <td>".substr($hckeck[4], 0, 10)."</td>
+                                            <td>".substr($hckeck[5], 0, 5)."</td>
                                         </tr>";
                                     $i++;
                                 }
@@ -99,7 +107,12 @@ else if(isset($_COOKIE['name']))
                         </tbody>
                     </table>
                 </div>
+                <div class="button-block-myTickets">
+                    <a href="pp_tickets.php"><input class="button-myTickets" type="submit" value="Заказать талон"></a>
+                </div>
             </div>
         </div>
+        
+        <script src="../js/tableFilter.js"></script>
     </body>
 </html>

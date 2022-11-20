@@ -217,6 +217,66 @@ tbody tr:hover {
 
 
 
+.button-block-myTickets {
+    margin-top: 30px;
+}
+
+.button-myTickets {
+    width: 250px;
+    background-color: #494974;
+    color: white;
+    font-family: 'Comfortaa', cursive;
+    transition-duration: 0.2s;
+}
+
+.button-myTickets:hover{
+    background-color: #7070A5;
+}
+
+
+.button-tickets {
+    margin: 0;
+    width: 110px;
+    background-color: #494974;
+    color: white;
+    font-family: 'Comfortaa', cursive;
+    transition-duration: 0.2s;
+}
+
+.button-tickets:hover{
+    background-color: #7070A5;
+}
+
+.filter {
+    width: 100%;
+    height: 50px;
+    background-color: darkgrey;
+    padding: 5px 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.input-filter {
+    width: 200px;
+    margin: 0;
+}
+
+select {
+    width: 150px;
+    height: 25px;
+    outline: none;
+    border-radius: 10px;
+    background-color: lightseagreen;
+    color: white;
+}
+
+.hidden-row {
+    display: none;
+}
+
+
+
 ::-webkit-scrollbar {
     width: 13px;
 }
