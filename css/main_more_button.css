@@ -1,0 +1,58 @@
+.more_button {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 10px;
+}
+
+.more_block{
+    width: 80%;
+    height: 80%;
+    background-color: #B3B5C6;
+    opacity: 0.96;
+    border-radius: 10px;
+    box-shadow: 0px 0px 25px 1px gray;
+}
+
+#moreContainer {
+    position: absolute;
+    position: fixed;
+    width: 90%;
+    height: 80vh;
+    display: flex;
+    justify-content: center;
+    display: none;
+}
+
+.windowCross {
+    display: flex;
+    justify-content: flex-end;
+    margin: 15px;
+}
+
+#cross {
+    background: none;
+    color: white;
+    border: none;
+    border-radius: 43%;
+    font-size: 20px;
+}
+
+.more_block_text {
+    padding: 10px 40px;;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.text {
+    width: 400px;
+    font-size: 18px;
+}
+
+.header_more_block {
+    padding-left: 40px;
+    font-size: 35px;
+    font-weight: bold;
+    margin: 0;
+    margin-bottom: 30px;
+}

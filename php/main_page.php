@@ -5,6 +5,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href="../css/main_page.css" rel="stylesheet">
+        <link href="../css/main_more_button.css" rel="stylesheet">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@500&display=swap" rel="stylesheet">
@@ -59,6 +60,39 @@ else
                     </div>
                 </header>
                 
+                <div class="more_button">
+                    <input type="submit" value="Адреса и время работы" onmousedown="viewDiv()">
+                </div>
+                
+                <div id="moreContainer">
+                    <div class="more_block">
+                        <div class="windowCross">
+                            <input id="cross" type="button" value="X" onmousedown="closeWindow()">
+                        </div>
+                        
+                        <p class="header_more_block">Health</p>
+                        
+                        <div class="more_block_text">
+                            <p class="text">Адрес: Спартаковский пер., д. 2<br><br>
+
+                            Телефон: +000 (00) 000-00-00<br><br>
+
+                            Часы работы:<br><br>
+                            Пн. — Пт. с 8:00 до 21:00<br>
+                            Сб. — Вс. с 9:00 до 21:00</p>
+                            
+                            <p class="text">Адрес: Пушкинская ул., д. 34, корпус 2<br><br>
+
+                            Телефон: +000 (00) 000-00-00<br><br>
+
+                            Часы работы:<br><br>
+                            Пн. — Пт. с 8:00 до 21:00<br>
+                            Сб. с 8:00 до 21:00<br>
+                            Вс. с 9:00 до 20:00</p>
+                        </div>
+                    </div>
+                </div>
+                
                 <div class="categories">
                     <a class="terapevtia" href="terapevtia.php">
                         <div class="categoies-img-block">
@@ -107,5 +141,7 @@ else
                 </div>
             </div>
         </div>
+        
+        <script src="../js/visibleBlock.js"></script>
     </body>
 </html>
